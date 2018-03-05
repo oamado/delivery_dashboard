@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305153856) do
+ActiveRecord::Schema.define(version: 20180305205457) do
+
+  create_table "delivery_timing_stats", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.integer "zipcode"
+    t.float "mean"
+    t.float "std_desv"
+    t.float "count"
+    t.index ["vendor_id"], name: "index_delivery_timing_stats_on_vendor_id"
+  end
 
   create_table "shipments", force: :cascade do |t|
     t.string "order_number"
