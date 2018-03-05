@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :vendor_id %>
-    <%= form.text_field :vendor_id, id: :shipment_vendor_id %>
+    <%= form.select :vendor_id, Vendor.all.collect { |a| [a.name, a.id] } %>
   </div>
 
   <div class="field">
@@ -34,11 +34,6 @@
   <div class="field">
     <%= form.label :zipcode %>
     <%= form.number_field :zipcode, id: :shipment_zipcode %>
-  </div>
-
-  <div class="field">
-    <%= form.label :delivered_at %>
-    <%= form.datetime_select :delivered_at, id: :shipment_delivered_at %>
   </div>
 
   <div class="actions">

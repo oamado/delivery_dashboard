@@ -28,12 +28,30 @@ RSpec.describe ShipmentsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Shipment. As you add validations to Shipment, be sure to
   # adjust the attributes here as well.
+  let(:vendor) { Vendor.new(name:'FedEx') }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      order_number: '1234',
+      vendor_id: vendor.id,
+      tracking_number: '7890',
+      address: '98765',
+      zipcode: 6798
+    }
   }
 
+  before  {
+      vendor.save!
+  }
+
+
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+        order_number: '1234',
+        vendor_id: vendor.id + 1,
+        tracking_number: '7890',
+        address: '98765',
+        zipcode: 6798
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -49,25 +67,9 @@ RSpec.describe ShipmentsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      shipment = Shipment.create! valid_attributes
-      get :show, params: {id: shipment.to_param}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns a success response" do
-      shipment = Shipment.create! valid_attributes
-      get :edit, params: {id: shipment.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -82,7 +84,7 @@ RSpec.describe ShipmentsController, type: :controller do
 
       it "redirects to the created shipment" do
         post :create, params: {shipment: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Shipment.last)
+        expect(response).to redirect_to('/shipments')
       end
     end
 
@@ -91,50 +93,6 @@ RSpec.describe ShipmentsController, type: :controller do
         post :create, params: {shipment: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested shipment" do
-        shipment = Shipment.create! valid_attributes
-        put :update, params: {id: shipment.to_param, shipment: new_attributes}, session: valid_session
-        shipment.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the shipment" do
-        shipment = Shipment.create! valid_attributes
-        put :update, params: {id: shipment.to_param, shipment: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(shipment)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        shipment = Shipment.create! valid_attributes
-        put :update, params: {id: shipment.to_param, shipment: invalid_attributes}, session: valid_session
-        expect(response).to be_success
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested shipment" do
-      shipment = Shipment.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: shipment.to_param}, session: valid_session
-      }.to change(Shipment, :count).by(-1)
-    end
-
-    it "redirects to the shipments list" do
-      shipment = Shipment.create! valid_attributes
-      delete :destroy, params: {id: shipment.to_param}, session: valid_session
-      expect(response).to redirect_to(shipments_url)
     end
   end
 
