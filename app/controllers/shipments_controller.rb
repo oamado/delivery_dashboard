@@ -1,10 +1,9 @@
 class ShipmentsController < ApplicationController
-  before_action :set_shipment, only: [:show, :edit, :update, :destroy]
+  before_action :set_shipment, only: [:deliver]
 
   # GET /shipments
-  # GET /shipments.json
   def index
-    @shipments = Shipment.all
+    @shipments = Shipment.where(delivered_at: nil)
   end
 
   # GET /shipments/new
@@ -13,7 +12,6 @@ class ShipmentsController < ApplicationController
   end
 
   # POST /shipments
-  # POST /shipments.json
   def create
 
     @shipment = Shipment.new(shipment_params)
@@ -26,6 +24,17 @@ class ShipmentsController < ApplicationController
       end
     end
   end
+
+  # POST /shipments/{id}/deliver
+  def deliver
+    @shipment.delivered_at = DateTime.now
+    @shipment.save
+    respond_to do |format|
+      format.html { redirect_to shipments_url, notice: 'Shipment was successfully delivered.' }
+    end
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
