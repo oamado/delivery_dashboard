@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shipments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order number</th>
+      <th>Vendor</th>
+      <th>Tracking number</th>
+      <th>Address</th>
+      <th>Zipcode</th>
+      <th>Delivered at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shipments.each do |shipment| %>
+      <tr>
+        <td><%= shipment.order_number %></td>
+        <td><%= shipment.vendor %></td>
+        <td><%= shipment.tracking_number %></td>
+        <td><%= shipment.address %></td>
+        <td><%= shipment.zipcode %></td>
+        <td><%= shipment.delivered_at %></td>
+        <td><%= link_to 'Show', shipment %></td>
+        <td><%= link_to 'Edit', edit_shipment_path(shipment) %></td>
+        <td><%= link_to 'Destroy', shipment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shipment', new_shipment_path %>
