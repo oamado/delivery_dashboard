@@ -3,7 +3,7 @@ class ShipmentsController < ApplicationController
 
   # GET /shipments
   def index
-    @shipments = Shipment.where(delivered_at: nil)
+    @shipments = Shipment.where(delivered_at: nil).preload(:vendor)
   end
 
   # GET /shipments/new
