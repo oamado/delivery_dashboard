@@ -4,6 +4,7 @@ class ShipmentsController < ApplicationController
   # GET /shipments
   def index
     @shipments = Shipment.where(delivered_at: nil).preload(:vendor)
+    @delay_timing_stats = DeliveryTimingStat.all
   end
 
   # GET /shipments/new

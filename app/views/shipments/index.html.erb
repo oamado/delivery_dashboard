@@ -17,13 +17,13 @@
 
   <tbody>
     <% @shipments.each do |shipment| %>
-      <tr>
+      <tr class="<%= shipment.delay_status(@delay_timing_stats) %>">
         <td><%= shipment.order_number %></td>
         <td><%= shipment.vendor.name %></td>
         <td><%= shipment.tracking_number %></td>
         <td><%= shipment.address %></td>
         <td><%= shipment.zipcode %></td>
-        <td><%=  %></td>
+        <td><%= shipment.delay_status(@delay_timing_stats) %></td>
         <td><%= link_to 'Mark as delivered', 'shipments/'+ shipment.id.to_s + '/deliver', method: :post, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

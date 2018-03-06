@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+
+.Normal {
+    background-color: #ffffff;
+}
+
+.Not.normal {
+    background-color: #EDAA1E;
+}
+
+.Very.late {
+    background-color: #FF5E3E;
+}
