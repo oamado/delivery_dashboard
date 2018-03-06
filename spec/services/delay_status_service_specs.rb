@@ -42,7 +42,7 @@ RSpec.describe DelayStatusService, type: :service do
       expect(DeliveryTimingStat.first.mean).to be_within(0.1).of(120.0)
     end
 
-    it 'calculates the correct standard desviation' do
+    it 'calculates the correct standard deviation' do
       expect(DeliveryTimingStat.first.std_desv).to be_within(0.1).of(58.78)
     end
 
@@ -80,7 +80,7 @@ RSpec.describe DelayStatusService, type: :service do
       expect(DeliveryTimingStat.first.mean).to be_within(0.1).of(60.0)
     end
 
-    it 'calculates the correct standard desviation' do
+    it 'calculates the correct standard deviation' do
       expect(DeliveryTimingStat.first.std_desv).to be_within(0.1).of(32.86)
     end
 

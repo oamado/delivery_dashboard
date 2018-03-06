@@ -9,7 +9,7 @@ RSpec.describe Shipment, type: :model do
   after {
     DeliveryTimingStat.delete_all
   }
-  it 'return Normal when the value is minor than the mean plus one standard desviation' do
+  it 'return Normal when the value is minor than the mean plus one standard deviation' do
     vendor = Vendor.create(name: 'Amazon')
     shipment = Shipment.create(order_number: '1234',
                     vendor_id: vendor.id,
@@ -23,7 +23,7 @@ RSpec.describe Shipment, type: :model do
 
   end
 
-  it 'return Not normal when the value is minor than the mean plus three time standard desviation' do
+  it 'return Not normal when the value is minor than the mean plus three time standard deviation' do
     vendor = Vendor.create(name: 'Amazon')
     shipment = Shipment.create(order_number: '1234',
                                vendor_id: vendor.id,
@@ -36,7 +36,7 @@ RSpec.describe Shipment, type: :model do
     expect(shipment.delay_status(DeliveryTimingStat.all)).to eq('Not normal')
   end
 
-  it 'returns Very late when the value is major than the mean plus three time standard desviation' do
+  it 'returns Very late when the value is major than the mean plus three time standard deviation' do
     vendor = Vendor.create(name: 'Amazon')
     shipment = Shipment.create(order_number: '1234',
                                vendor_id: vendor.id,

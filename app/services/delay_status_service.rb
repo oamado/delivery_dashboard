@@ -18,7 +18,7 @@ class DelayStatusService
     stats = DeliveryTimingStat.find_by(vendor_id: shipment.vendor_id, zipcode: shipment.zipcode)
     if stats
       stats.mean = incremental_mean(stats.mean, stats.count, hours)
-      stats.std_desv = incremental_std_desviation(stats.std_desv, stats.mean , stats.count, hours )
+      stats.std_desv = incremental_std_deviation(stats.std_desv, stats.mean , stats.count, hours )
       stats.count += 1
       stats.save
     else
@@ -41,7 +41,7 @@ class DelayStatusService
     (count * p_mean + value)/(count + 1)
   end
 
-  def self.incremental_std_desviation(p_std_desv, mean, count, value)
+  def self.incremental_std_deviation(p_std_desv, mean, count, value)
     p_variance = p_std_desv * p_std_desv
     Math.sqrt((p_variance * count + (value - mean)**2)/(count + 1))
   end
