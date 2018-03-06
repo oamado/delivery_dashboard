@@ -28,7 +28,7 @@ RSpec.describe ShipmentsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Shipment. As you add validations to Shipment, be sure to
   # adjust the attributes here as well.
-  let(:vendor) { Vendor.new(name:'FedEx') }
+  let(:vendor) { Vendor.create(name:'FedEx') }
   let(:valid_attributes) {
     {
       order_number: '1234',
@@ -38,11 +38,6 @@ RSpec.describe ShipmentsController, type: :controller do
       zipcode: 6798
     }
   }
-
-  before  {
-      vendor.save!
-  }
-
 
   let(:invalid_attributes) {
     {
